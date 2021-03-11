@@ -1,0 +1,49 @@
+
+Create database ReadingClub
+
+use ReadingClub
+
+create table Categories
+(
+	Id Uniqueidentifier PRIMARY KEY DEFAULT NEWID(),
+	Name NVARCHAR(MAX) DEFAULT 'Общая'
+)
+
+Insert into Categories values 
+	(NEWID(), DEFAULT)
+
+
+select * from Categories
+
+
+create table Authors
+(
+	Id Uniqueidentifier PRIMARY KEY DEFAULT NEWID(),
+	Name NVARCHAR(MAX) DEFAULT 'Аноним'
+)
+
+Insert into Authors values 
+	(NEWID(), DEFAULT)
+
+select * from Authors
+
+create table Articles
+(
+	Id Uniqueidentifier PRIMARY KEY DEFAULT NEWID(),
+	Name NVARCHAR(MAX) DEFAULT 'Без названия',
+
+	CategoryId Uniqueidentifier DEFAULT '{F5C65CB9-10CC-44CF-B89B-36756D6B32EA}',
+	CONSTRAINT FK_Articles_Category FOREIGN KEY(CategoryId)
+			REFERENCES Categories(Id),
+
+	AuthorsId Uniqueidentifier DEFAULT '{B716BDDF-C821-4D89-85ED-F9A159B374A9}',
+	CONSTRAINT FK_Articles_Authors FOREIGN KEY(AuthorsId)
+			REFERENCES Authors(Id),
+
+)
+
+Insert into Articles values 
+	(NEWID(), DEFAULT,DEFAULT,DEFAULT)
+
+select * from Articles
+
